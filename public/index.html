@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Web Clone</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f1f1f1; }
+        #messages { max-height: 500px; overflow-y: auto; margin-bottom: 20px; }
+        .message { padding: 10px; background: #fff; margin: 10px 0; border-radius: 8px; }
+        .message.from { background-color: #d1f7c4; }
+        .message.to { background-color: #f0f0f0; }
+        input, button { padding: 10px; margin-top: 10px; width: 100%; box-sizing: border-box; }
+
+
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ece5dd;
+}
+
+h1 {
+    background-color: #128C7E;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    margin: 0;
+}
+
+#messages {
+    background-color: white;
+    margin: 20px;
+    padding: 10px;
+    border-radius: 10px;
+    max-height: 400px;
+    overflow-y: scroll;
+}
+
+.message {
+    background-color: #f1f1f1;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 5px 0;
+    width: fit-content;
+}
+
+.message.from {
+    background-color: #dcf8c6;
+    align-self: flex-start;
+}
+
+.message.to {
+    background-color: #ffffff;
+    align-self: flex-end;
+}
+
+input, button {
+    padding: 10px;
+    border: none;
+    width: 95%;
+    margin: 10px;
+    border-radius: 5px;
+}
+
+
+    </style>
+</head>
+<body>
+    <h1>WhatsApp Web Clone</h1>
+    <div id="messages"></div>
+    <input type="text" id="message" placeholder="Escribe tu mensaje..." />
+    <button id="sendMessage">Enviar mensaje</button>
+
+    <script src="https://cdn.jsdelivr.net/npm/socket.io/client-dist/socket.io.min.js"></script>
+    <script>
+        const socket = io();
+
+        // Escuchar mensajes nuevos
+        socket.on('message', (msg) => {
+            const messagesContainer = document.getElementById('messages');
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message', 'from');
+            messageElement.textContent = `${msg.from}: ${msg.body}`;
+            messagesContainer.appendChild(messageElement);
+        });
+
+        // Enviar mensaje al backend
+        document.getElementById('sendMessage').addEventListener('click', () => {
+            const message = document.getElementById('message').value;
+            const number = '51921719043'; // Número de destino (debe ser dinámico en tu caso)
+
+            if (message) {
+                fetch('/send-message', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ to: number, message: message })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Mensaje enviado:', data);
+                })
+                .catch(error => {
+                    console.error('Error al enviar mensaje:', error);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
