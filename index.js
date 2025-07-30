@@ -220,15 +220,24 @@ client.on("message", async (msg) => {
     : "51" + contacto.number;
 
   // Respuestas automáticas simples
-  if (msg.body.toLowerCase() === "hola") {
-    msg.reply("¡Hola! ¿En qué puedo ayudarte?");
-  } else if (msg.body.toLowerCase() === "adiós") {
-    msg.reply("¡Adiós! Que tengas un buen día 😃");
-  }
+  // if (msg.body.toLowerCase() === "hola") {
+  //   msg.reply("¡Hola! ¿En qué puedo ayudarte?");
+  // } else if (msg.body.toLowerCase() === "adiós") {
+  //   msg.reply("¡Adiós! Que tengas un buen día 😃");
+  // }
 
-  // Responder con un mensaje personalizado
-  else if (msg.body.toLowerCase().includes("información")) {
-    msg.reply("Claro, ¿qué tipo de información necesitas?");
+  // // Responder con un mensaje personalizado
+  // else if (msg.body.toLowerCase().includes("información")) {
+  //   msg.reply("Claro, ¿qué tipo de información necesitas?");
+  // }
+
+
+
+  const respuesta = await responderConIA(msg.body);
+  if (respuesta) {
+    msg.reply(respuesta);
+  } else {
+    msg.reply("Lo siento, no pude responder en este momento.");
   }
 
   io.emit("message", {
@@ -286,6 +295,37 @@ client.on("message", async (msg) => {
     console.error("❌ Error al guardar el contacto:", error.message);
   }
 });
+
+
+
+const fetch = require("node-fetch");
+
+async function responderConIA(pregunta) {
+  const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+    method: "POST",
+    headers: {
+      "Authorization": "Bearer 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",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      model: "mistralai/mistral-7b-instruct", // o "meta-llama/llama-3-8b-instruct"
+      messages: [
+        {
+          role: "system",
+          "content": "Eres un asistente virtual de VibesFest, un organizador de eventos de música rock y alternativa en locales de Barranco, Perú, como El Tayta y Lice Iana Rock. Tu misión es responder preguntas de forma breve, clara y útil. Responde en una o dos frases máximo. Sé directo y amigable. No repitas la pregunta del usuario. Si no tienes la información, sugiere contactar a Nick Pasco o visitar Instagram @vibesfest.peru. Responde dudas sobre fechas de eventos, precios, participación de bandas, detalles de locales, y redes sociales. No uses párrafos largos ni explicaciones innecesarias."
+        },
+        {
+          role: "user",
+          content: pregunta
+        }
+      ]
+    })
+  });
+
+  const data = await response.json();
+  return data.choices[0]?.message?.content;
+}
+
 
 client.on("ready", () => {
   console.log("✅ Cliente conectado");

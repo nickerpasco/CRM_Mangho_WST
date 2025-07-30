@@ -1,21 +1,21 @@
-2025/07/29-20:15:48.428 ae98 Reusing MANIFEST D:\MANGHO\crm\app\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
-2025/07/29-20:15:48.434 ae98 Recovering log #864
-2025/07/29-20:15:48.508 ae98 Reusing old log D:\MANGHO\crm\app\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000864.log 
-2025/07/29-20:15:50.154 9fe4 Level-0 table #873: started
-2025/07/29-20:15:50.167 9fe4 Level-0 table #873: 417105 bytes OK
-2025/07/29-20:15:50.168 9fe4 Delete type=0 #864
-2025/07/29-20:15:50.169 9fe4 Manual compaction at level-0 from '\x00~\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x7f\x00\x00\x00' @ 0 : 0; will stop at (end)
-2025/07/29-20:15:52.228 9e70 Compacting 1@1 + 5@2 files
-2025/07/29-20:15:52.347 9e70 Generated table #874@1: 87289 keys, 2238538 bytes
-2025/07/29-20:15:52.469 9e70 Generated table #875@1: 99541 keys, 2257797 bytes
-2025/07/29-20:15:52.521 9e70 Generated table #876@1: 19353 keys, 2257339 bytes
-2025/07/29-20:15:52.593 9e70 Generated table #877@1: 21800 keys, 2174865 bytes
-2025/07/29-20:15:52.664 9e70 Generated table #878@1: 55264 keys, 1283605 bytes
-2025/07/29-20:15:52.664 9e70 Compacted 1@1 + 5@2 files => 10212144 bytes
-2025/07/29-20:15:52.665 9e70 compacted to: files[ 0 0 5 0 0 0 0 ]
-2025/07/29-20:15:52.666 9e70 Delete type=2 #866
-2025/07/29-20:15:52.666 9e70 Delete type=2 #867
-2025/07/29-20:15:52.666 9e70 Delete type=2 #868
-2025/07/29-20:15:52.666 9e70 Delete type=2 #869
-2025/07/29-20:15:52.666 9e70 Delete type=2 #870
-2025/07/29-20:15:52.666 9e70 Delete type=2 #873
+2025/07/29-23:39:42.683 9eac Reusing MANIFEST D:\MANGHO\crm\app\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2025/07/29-23:39:42.686 9eac Recovering log #910
+2025/07/29-23:39:42.711 9eac Reusing old log D:\MANGHO\crm\app\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000910.log 
+2025/07/29-23:39:46.572 2710 Manual compaction at level-0 from '\x00\x83\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x84\x00\x00\x00' @ 0 : 0; will stop at (end)
+2025/07/29-23:41:19.907 5ab8 Level-0 table #919: started
+2025/07/29-23:41:19.945 5ab8 Level-0 table #919: 1356346 bytes OK
+2025/07/29-23:41:19.947 5ab8 Delete type=0 #910
+2025/07/29-23:41:20.362 866c Compacting 1@1 + 5@2 files
+2025/07/29-23:41:20.464 866c Generated table #920@1: 86736 keys, 2236076 bytes
+2025/07/29-23:41:20.544 866c Generated table #921@1: 100157 keys, 2253359 bytes
+2025/07/29-23:41:20.591 866c Generated table #922@1: 31926 keys, 2283212 bytes
+2025/07/29-23:41:20.630 866c Generated table #923@1: 21343 keys, 2176174 bytes
+2025/07/29-23:41:20.686 866c Generated table #924@1: 58856 keys, 1743607 bytes
+2025/07/29-23:41:20.686 866c Compacted 1@1 + 5@2 files => 10692428 bytes
+2025/07/29-23:41:20.687 866c compacted to: files[ 0 0 5 0 0 0 0 ]
+2025/07/29-23:41:20.687 866c Delete type=2 #912
+2025/07/29-23:41:20.687 866c Delete type=2 #913
+2025/07/29-23:41:20.687 866c Delete type=2 #914
+2025/07/29-23:41:20.687 866c Delete type=2 #915
+2025/07/29-23:41:20.687 866c Delete type=2 #916
+2025/07/29-23:41:20.687 866c Delete type=2 #919
