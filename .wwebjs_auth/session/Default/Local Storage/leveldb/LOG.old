@@ -1,3 +1,15 @@
-2025/07/29-23:39:42.161 3a08 Reusing MANIFEST D:\MANGHO\crm\app\.wwebjs_auth\session\Default\Local Storage\leveldb/MANIFEST-000001
-2025/07/29-23:39:42.169 3a08 Recovering log #32
-2025/07/29-23:39:42.170 3a08 Reusing old log D:\MANGHO\crm\app\.wwebjs_auth\session\Default\Local Storage\leveldb/000032.log 
+2025/07/31-14:42:18.875 7574 Reusing MANIFEST D:\MANGHO\crm\app\.wwebjs_auth\session\Default\Local Storage\leveldb/MANIFEST-000001
+2025/07/31-14:42:18.886 7574 Recovering log #42
+2025/07/31-14:42:18.887 7574 Reusing old log D:\MANGHO\crm\app\.wwebjs_auth\session\Default\Local Storage\leveldb/000042.log 
+2025/07/31-19:12:40.735 7344 Level-0 table #46: started
+2025/07/31-19:12:40.741 7344 Level-0 table #46: 16194 bytes OK
+2025/07/31-19:12:40.742 7344 Delete type=0 #42
+2025/07/31-19:12:40.743 7344 Compacting 4@0 + 1@1 files
+2025/07/31-19:12:40.747 7344 Generated table #47@0: 271 keys, 9222 bytes
+2025/07/31-19:12:40.747 7344 Compacted 4@0 + 1@1 files => 9222 bytes
+2025/07/31-19:12:40.747 7344 compacted to: files[ 0 1 1 0 0 0 0 ]
+2025/07/31-19:12:40.747 7344 Delete type=2 #34
+2025/07/31-19:12:40.748 7344 Delete type=2 #37
+2025/07/31-19:12:40.748 7344 Delete type=2 #40
+2025/07/31-19:12:40.748 7344 Delete type=2 #43
+2025/07/31-19:12:40.748 7344 Delete type=2 #46

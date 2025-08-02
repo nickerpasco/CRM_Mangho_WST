@@ -8,6 +8,8 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
 const axios = require("axios");
+
+const { Buttons } = require('whatsapp-web.js');
 // Middleware para parsear JSON
 app.use(express.json()); // Esto es necesario para leer los cuerpos JSON en las solicitudes POST
 
@@ -60,6 +62,31 @@ app.get("/whatsapp-status", async (req, res) => {
     });
   }
 });
+
+
+
+// Ruta para enviar botones
+app.post('/send-buttons', async (req, res) => {
+    const { number, message, buttons, title, footer } = req.body;
+
+    if (!number || !buttons) {
+        return res.status(400).json({ error: 'Faltan datos obligatorios' });
+    }
+
+    try {
+        const chatId = number.includes('@c.us') ? number : number + '@c.us';
+
+        const buttonMessage = new Buttons(message || 'Selecciona una opción', buttons, title || 'Opciones', footer || '');
+
+        await client.sendMessage(chatId, buttonMessage);
+
+        res.status(200).json({ status: 'Enviado con éxito' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Error al enviar mensaje' });
+    }
+});
+
 
 app.get("/whatsapp-disconnect", async (req, res) => {
   try {

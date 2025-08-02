@@ -1,3 +1,6 @@
-2025/07/29-23:44:01.031 9b84 Reusing MANIFEST D:\MANGHO\crm\app\.wwebjs_auth\session\Default\Local Storage\leveldb/MANIFEST-000001
-2025/07/29-23:44:01.041 9b84 Recovering log #32
-2025/07/29-23:44:01.043 9b84 Reusing old log D:\MANGHO\crm\app\.wwebjs_auth\session\Default\Local Storage\leveldb/000032.log 
+2025/07/31-22:39:25.323 bfd8 Reusing MANIFEST D:\MANGHO\crm\app\.wwebjs_auth\session\Default\Local Storage\leveldb/MANIFEST-000001
+2025/07/31-22:39:25.330 bfd8 Recovering log #45
+2025/07/31-22:39:25.331 bfd8 Reusing old log D:\MANGHO\crm\app\.wwebjs_auth\session\Default\Local Storage\leveldb/000045.log 
+2025/08/01-11:14:00.546 2560 Level-0 table #50: started
+2025/08/01-11:14:00.559 2560 Level-0 table #50: 16219 bytes OK
+2025/08/01-11:14:00.561 2560 Delete type=0 #45

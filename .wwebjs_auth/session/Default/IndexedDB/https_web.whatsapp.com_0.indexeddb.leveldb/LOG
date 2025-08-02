@@ -1,21 +1,51 @@
-2025/07/29-23:44:01.611 2818 Reusing MANIFEST D:\MANGHO\crm\app\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
-2025/07/29-23:44:01.622 2818 Recovering log #918
-2025/07/29-23:44:01.631 2818 Reusing old log D:\MANGHO\crm\app\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000918.log 
-2025/07/29-23:44:03.341 5344 Level-0 table #927: started
-2025/07/29-23:44:03.347 5344 Level-0 table #927: 61751 bytes OK
-2025/07/29-23:44:03.348 5344 Delete type=0 #918
-2025/07/29-23:44:03.348 5344 Manual compaction at level-0 from '\x00\x84\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x85\x00\x00\x00' @ 0 : 0; will stop at (end)
-2025/07/29-23:44:05.356 8c90 Compacting 1@1 + 5@2 files
-2025/07/29-23:44:05.471 8c90 Generated table #928@1: 86989 keys, 2238206 bytes
-2025/07/29-23:44:05.598 8c90 Generated table #929@1: 100067 keys, 2251379 bytes
-2025/07/29-23:44:05.667 8c90 Generated table #930@1: 31959 keys, 2285559 bytes
-2025/07/29-23:44:05.733 8c90 Generated table #931@1: 21345 keys, 2178550 bytes
-2025/07/29-23:44:05.801 8c90 Generated table #932@1: 58866 keys, 1746086 bytes
-2025/07/29-23:44:05.801 8c90 Compacted 1@1 + 5@2 files => 10699780 bytes
-2025/07/29-23:44:05.801 8c90 compacted to: files[ 0 0 5 0 0 0 0 ]
-2025/07/29-23:44:05.802 8c90 Delete type=2 #920
-2025/07/29-23:44:05.802 8c90 Delete type=2 #921
-2025/07/29-23:44:05.802 8c90 Delete type=2 #922
-2025/07/29-23:44:05.802 8c90 Delete type=2 #923
-2025/07/29-23:44:05.802 8c90 Delete type=2 #924
-2025/07/29-23:44:05.802 8c90 Delete type=2 #927
+2025/07/31-22:39:26.102 72a4 Reusing MANIFEST D:\MANGHO\crm\app\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2025/07/31-22:39:26.105 72a4 Recovering log #1042
+2025/07/31-22:39:26.106 72a4 Reusing old log D:\MANGHO\crm\app\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/001042.log 
+2025/07/31-22:39:30.799 8f2c Compacting 1@1 + 5@2 files
+2025/07/31-22:39:30.903 8f2c Generated table #1045@1: 86890 keys, 2236568 bytes
+2025/07/31-22:39:30.986 8f2c Generated table #1046@1: 98742 keys, 2252104 bytes
+2025/07/31-22:39:31.084 8f2c Generated table #1047@1: 64925 keys, 2341566 bytes
+2025/07/31-22:39:31.154 8f2c Generated table #1048@1: 12060 keys, 2153854 bytes
+2025/07/31-22:39:31.226 8f2c Generated table #1049@1: 25626 keys, 2177982 bytes
+2025/07/31-22:39:31.233 8f2c Generated table #1050@1: 5132 keys, 120271 bytes
+2025/07/31-22:39:31.233 8f2c Compacted 1@1 + 5@2 files => 11282345 bytes
+2025/07/31-22:39:31.234 8f2c compacted to: files[ 0 0 7 0 0 0 0 ]
+2025/07/31-22:39:31.234 8f2c Delete type=2 #1036
+2025/07/31-22:39:31.234 8f2c Delete type=2 #1037
+2025/07/31-22:39:31.234 8f2c Delete type=2 #1038
+2025/07/31-22:39:31.234 8f2c Delete type=2 #1039
+2025/07/31-22:39:31.234 8f2c Delete type=2 #1040
+2025/07/31-22:39:31.234 8f2c Delete type=2 #1043
+2025/07/31-22:39:31.709 8f2c Level-0 table #1052: started
+2025/07/31-22:39:31.714 8f2c Level-0 table #1052: 19699 bytes OK
+2025/07/31-22:39:31.715 8f2c Delete type=0 #1042
+2025/07/31-22:39:31.715 8f2c Manual compaction at level-0 from '\x00\x8c\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x8d\x00\x00\x00' @ 0 : 0; will stop at (end)
+2025/07/31-22:39:34.030 b8b4 Compacting 1@1 + 7@2 files
+2025/07/31-22:39:34.154 b8b4 Generated table #1053@1: 87289 keys, 2237564 bytes
+2025/07/31-22:39:34.274 b8b4 Generated table #1054@1: 98666 keys, 2249871 bytes
+2025/07/31-22:39:34.348 b8b4 Generated table #1055@1: 64994 keys, 2340567 bytes
+2025/07/31-22:39:34.386 b8b4 Generated table #1056@1: 11900 keys, 2154669 bytes
+2025/07/31-22:39:34.435 b8b4 Generated table #1057@1: 25843 keys, 2178874 bytes
+2025/07/31-22:39:34.497 b8b4 Generated table #1058@1: 60969 keys, 1424147 bytes
+2025/07/31-22:39:34.497 b8b4 Compacted 1@1 + 7@2 files => 12585692 bytes
+2025/07/31-22:39:34.498 b8b4 compacted to: files[ 0 0 6 0 0 0 0 ]
+2025/07/31-22:39:34.498 b8b4 Delete type=2 #1041
+2025/07/31-22:39:34.499 b8b4 Delete type=2 #1045
+2025/07/31-22:39:34.499 b8b4 Delete type=2 #1046
+2025/07/31-22:39:34.499 b8b4 Delete type=2 #1047
+2025/07/31-22:39:34.499 b8b4 Delete type=2 #1048
+2025/07/31-22:39:34.499 b8b4 Delete type=2 #1049
+2025/07/31-22:39:34.499 b8b4 Delete type=2 #1050
+2025/07/31-22:39:34.499 b8b4 Delete type=2 #1052
+2025/07/31-23:09:10.495 b1a0 Level-0 table #1060: started
+2025/07/31-23:09:10.520 b1a0 Level-0 table #1060: 1374381 bytes OK
+2025/07/31-23:09:10.521 b1a0 Delete type=0 #1051
+2025/07/31-23:10:08.406 b1a0 Compacting 1@1 + 6@2 files
+2025/07/31-23:10:08.530 b1a0 Generated table #1061@1: 86287 keys, 2235657 bytes
+2025/07/31-23:10:08.608 b1a0 Generated table #1062@1: 98487 keys, 2249837 bytes
+2025/07/31-23:10:08.685 b1a0 Generated table #1063@1: 68157 keys, 2345037 bytes
+2025/07/31-23:10:08.717 b1a0 Generated table #1064@1: 11175 keys, 2151596 bytes
+2025/07/31-23:10:08.763 b1a0 Generated table #1065@1: 23721 keys, 2183104 bytes
+2025/07/31-23:10:08.841 b1a0 Generated table #1066@1: 66963 keys, 1638276 bytes
+2025/07/31-23:10:08.841 b1a0 Compacted 1@1 + 6@2 files => 12803507 bytes
+2025/07/31-23:10:08.842 b1a0 compacted to: files[ 0 0 6 0 0 0 0 ]
