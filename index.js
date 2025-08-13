@@ -63,7 +63,23 @@ app.get("/whatsapp-status", async (req, res) => {
   }
 });
 
+let chatsCache = [];
+let contactosCache = []; // Guardar contactos para no consultarlos cada vez
 
+app.get('/contactos', (req, res) => {
+    if (contactosCache.length === 0) {
+        return res.status(500).json({ mensaje: 'Contactos no disponibles aún. ¿Escaneaste el QR?' });
+    }
+
+    const data = contactosCache.map(c => ({
+        id: c.id._serialized,
+        nombre: c.name || c.pushname || '',
+        numero: c.number,
+        esGrupo: c.isGroup
+    }));
+
+    res.json(data);
+});
 
 // Ruta para enviar botones
 app.post('/send-buttons', async (req, res) => {
@@ -233,6 +249,53 @@ client.on("message_ack", (msg, ack) => {
 
 const contactosRegistrados = new Set(); // Guarda números ya registrados
 
+
+
+
+app.post("/entrenarModelo", async (req, res) => {
+  const { mensaje } = req.body;
+
+  try {
+    const resultado = await responderConIAv1(mensaje);
+
+    // Validar si el modelo devolvió JSON válido
+    let datosIA;
+    try {
+      datosIA = JSON.parse(resultado);
+    } catch (error) {
+      return res.send({
+        status: "error",
+        message: "La IA no devolvió un JSON válido",
+        respuestaIA: resultado
+      });
+    }
+
+    // Aquí podrías ejecutar la acción en tu backend
+    if (datosIA.accion === "REGISTRAR_CONTACTO") {
+      console.log("Acción: Registrar contacto");
+      // Llamada a tu lógica de backend
+    } else if (datosIA.accion === "REGISTRAR_CONTACTO_ETAPA") {
+      console.log(`Acción: Registrar contacto en etapa de campaña ${datosIA.idCampania}`);
+      // Llamada a tu lógica de backend
+    }
+
+    res.send({
+      status: "ok",
+      message: "Procesado correctamente",
+      accion: datosIA.accion,
+      idCampania: datosIA.idCampania,
+      respuestaUsuario: datosIA.respuesta
+    });
+  } catch (error) {
+    res.status(500).send({
+      status: "error",
+      message: "Error procesando el mensaje",
+      error: error.message
+    });
+  }
+});
+
+
 client.on("message", async (msg) => {
   console.log(`Mensaje recibido de ${msg.from}: ${msg.body}`);
 
@@ -245,20 +308,118 @@ client.on("message", async (msg) => {
   const numero = contacto.number.startsWith("51")
     ? contacto.number
     : "51" + contacto.number;
-
-  // Respuestas automáticas simples
-  // if (msg.body.toLowerCase() === "hola") {
-  //   msg.reply("¡Hola! ¿En qué puedo ayudarte?");
-  // } else if (msg.body.toLowerCase() === "adiós") {
-  //   msg.reply("¡Adiós! Que tengas un buen día 😃");
-  // }
-
-  // // Responder con un mensaje personalizado
-  // else if (msg.body.toLowerCase().includes("información")) {
-  //   msg.reply("Claro, ¿qué tipo de información necesitas?");
-  // }
+ 
+  const respuesta = await responderConIAv2(msg.body);
+  if (respuesta) {
+    msg.reply(respuesta);
+  } else {
+    msg.reply("Lo siento, no pude responder en este momento.");
+  }
 
 
+
+    switch (resultado.accion) {
+    case "REGISTRAR_CONTACTO":
+      // Guardar contacto sin campaña
+     
+      msg.reply("registrar contacto?");
+      break;
+    case "REGISTRAR_CONTACTO_ETAPA":
+      // Guardar contacto con campañaId
+      
+      msg.reply(`registrar contacto con etapada`);
+      break;
+    default:
+      msg.reply("Disculpa, no pude procesar tu mensaje.");
+  }
+
+
+
+ 
+});
+
+
+
+async function responderConIAv2(pregunta) {
+  const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+    method: "POST",
+    headers: {
+        "Authorization": "Bearer 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",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      model: "mistralai/mistral-7b-instruct",
+      messages: [
+        {
+          role: "system",
+          content: `Eres un asistente que recibe mensajes de usuarios y detecta la acción que debe tomar el backend. \
+Si el mensaje es un saludo o frase genérica, devuelve este JSON exacto: {"accion":"REGISTRAR_CONTACTO"}. \
+Si el mensaje menciona alguna campaña de esta lista: 1: Preventa VibesFest, 2: Rock en el Bar, 3: Auspicio Locales, \
+devuelve este JSON exacto: {"accion":"REGISTRAR_CONTACTO_ETAPA", "campañaId":ID}. \
+Siempre responde SOLO con un JSON válido, sin texto adicional.`
+        },
+        {
+          role: "user",
+          content: pregunta
+        }
+      ]
+    })
+  });
+
+  const data = await response.json();
+
+  try {
+    return JSON.parse(data.choices[0].message.content);
+  } catch {
+    return null; // O manejar error
+  }
+}
+
+// En el manejador de mensajes:
+client.on("message", async (msg) => {
+  if (msg.from.includes("@g.us") || msg.from === "status@broadcast") return;
+
+  const contacto = await msg.getContact();
+  const numero = contacto.number.startsWith("51") ? contacto.number : "51" + contacto.number;
+
+  const resultado = await responderConIA(msg.body);
+
+  if (!resultado) {
+    return msg.reply("No entendí tu mensaje, por favor intenta nuevamente.");
+  }
+
+  switch (resultado.accion) {
+    case "REGISTRAR_CONTACTO":
+      // Guardar contacto sin campaña
+      guardarContacto(numero, contacto.pushname || contacto.number);
+      msg.reply("¡Hola! Gracias por escribirnos. ¿En qué puedo ayudarte?");
+      break;
+    case "REGISTRAR_CONTACTO_ETAPA":
+      // Guardar contacto con campañaId
+      guardarContactoConCampaña(numero, contacto.pushname || contacto.number, resultado.campañaId);
+      msg.reply(`Gracias por tu interés en la campaña ${resultado.campañaId}. Pronto te enviaremos más info.`);
+      break;
+    default:
+      msg.reply("Disculpa, no pude procesar tu mensaje.");
+  }
+});
+
+
+
+client.on("messagev2", async (msg) => {
+  console.log(`Mensaje recibido de ${msg.from}: ${msg.body}`);
+
+  if (msg.from.includes("@g.us") || msg.from === "status@broadcast") {
+    // Ignorar si es de un grupo o estado
+    return;
+  }
+
+  const contacto = await msg.getContact();
+  const numero = contacto.number.startsWith("51")
+    ? contacto.number
+    : "51" + contacto.number;
+
+  
 
   const respuesta = await responderConIA(msg.body);
   if (respuesta) {
@@ -327,6 +488,49 @@ client.on("message", async (msg) => {
 
 const fetch = require("node-fetch");
 
+async function responderConIAv1(pregunta) {
+  const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+    method: "POST",
+    headers: {
+      "Authorization": "Bearer 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",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      model: "mistralai/mistral-7b-instruct",
+      messages: [
+        {
+          role: "system",
+          content: `
+          Eres un asistente virtual de VibesFest.
+          Analiza el mensaje del usuario y devuelve SOLO un JSON así:
+          {
+            "accion": "REGISTRAR_CONTACTO" | "REGISTRAR_CONTACTO_ETAPA" | null,
+            "idCampania": <número o null>,
+            "respuesta": "<texto breve para el usuario o null si no hay respuesta>"
+          }
+
+          Reglas:
+          - Saludo o conversación general sobre VibesFest → accion: "REGISTRAR_CONTACTO", idCampania: null.
+          - Pregunta sobre eventos, fechas, precios, bandas o campañas → accion: "REGISTRAR_CONTACTO_ETAPA" con idCampania correspondiente.
+          - Mensaje fuera de contexto (no relacionado con música, eventos o VibesFest) → accion: null, idCampania: null, respuesta: null.
+          Campañas:
+            1: Preventa VibesFest - venta anticipada de entradas.
+            2: Rock en el Bar - promoción evento rock.
+          No devuelvas nada fuera del JSON. Si no hay acción, usa null en "accion".
+          `
+        },
+        {
+          role: "user",
+          content: pregunta
+        }
+      ]
+    })
+  });
+
+  const data = await response.json();
+  return data.choices[0]?.message?.content;
+}
+
 async function responderConIA(pregunta) {
   const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
     method: "POST",
@@ -353,9 +557,28 @@ async function responderConIA(pregunta) {
   return data.choices[0]?.message?.content;
 }
 
+app.get('/chats-contactos', (req, res) => {
+    if (chatsCache.length === 0) {
+        return res.status(500).json({ mensaje: 'Chats no disponibles aún. ¿Escaneaste el QR?' });
+    }
 
-client.on("ready", () => {
+    const data = chatsCache
+        .filter(chat => !chat.isGroup) // solo chats privados
+        .map(chat => ({
+            id: chat.id._serialized,
+            nombre: chat.name || chat.contact?.pushname || '',
+            numero: chat.id.user,
+            esGrupo: chat.isGroup,
+            ultimaActividad: chat.timestamp
+        }));
+
+    res.json(data);
+});
+
+client.on("ready", async  () => {
   console.log("✅ Cliente conectado");
+   contactosCache = await client.getContacts();
+     chatsCache = await client.getChats();
   io.emit("ready");
 });
 
