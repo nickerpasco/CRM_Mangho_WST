@@ -1,3 +1,2 @@
-2025/08/12-18:02:02.710 6a28 Reusing MANIFEST D:\MANGHO\crm\app\.wwebjs_auth\session\Default\shared_proto_db/MANIFEST-000001
-2025/08/12-18:02:02.712 6a28 Recovering log #3
-2025/08/12-18:02:02.712 6a28 Reusing old log D:\MANGHO\crm\app\.wwebjs_auth\session\Default\shared_proto_db/000003.log 
+2025/08/19-16:04:00.221 a9ec Creating DB D:\MANGHO\crm\app\.wwebjs_auth\session\Default\shared_proto_db since it was missing.
+2025/08/19-16:04:00.243 a9ec Reusing MANIFEST D:\MANGHO\crm\app\.wwebjs_auth\session\Default\shared_proto_db/MANIFEST-000001
