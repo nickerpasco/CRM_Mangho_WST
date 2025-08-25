@@ -24,6 +24,10 @@ app.use("/contactos", contactoRoutes);
 const messageRoutes = require("./routes/message.routes");
 app.use("/mensajes", messageRoutes);
 
+// const motificationRouters = require("./routes/notificacion.routes");
+// app.use("/notificaciones", motificationRouters);
+ 
+
  
 
 // Inicialización de WhatsApp y sockets
@@ -45,4 +49,4 @@ client.on("disconnected", (reason) => {
 
 client.initialize();
 
-module.exports = { app, server };
+module.exports = { app, server ,io};
